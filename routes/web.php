@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('file-import-export', [ProductController::class, 'fileImportExport']);
+Route::post('file-import', [ProductController::class, 'fileImport'])->name('file-import');
+Route::get('file-export', [ProductController::class, 'fileExport'])->name('file-export');

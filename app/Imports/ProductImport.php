@@ -5,7 +5,7 @@ namespace App\Imports;
 use App\Models\Product;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class UsersImport implements ToModel
+class ProductImport implements ToModel
 {
     /**
     * @param array $row
@@ -15,7 +15,12 @@ class UsersImport implements ToModel
     public function model(array $row)
     {
         return new Product([
-            //
+            'name'     => $row[0],
+            'code'    => $row[1],
+            'price' => $row[3],
+            'category_id' => 1,
+            'unit_id' => 1,
+            'qty' => 1,
         ]);
     }
 }

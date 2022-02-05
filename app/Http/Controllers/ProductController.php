@@ -1,47 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Imports\ProductImport;
 use App\Models\product;
 use Illuminate\Http\Request;
-
+use Maatwebsite\Excel\Facades\Excel;
 class ProductController extends Controller
 {
 
-    public function index()
+
+    public function fileImportExport()
     {
-        //
+       return view('upload');
     }
 
-    public function create()
+    public function fileImport(Request $request)
     {
-        //
+        Excel::import(new ProductImport, $request->file('file')->store('temp'));
+        return back();
     }
 
-    public function store(Request $request)
+    public function fileExport()
     {
-        //
-    }
- 
-    public function show(product $product)
-    {
-        //
-    }
-
-
-    public function edit(product $product)
-    {
-        //
-    }
-
-
-    public function update(Request $request, product $product)
-    {
-        //
-    }
-
-    public function destroy(product $product)
-    {
-        //
+        return Excel::download(new ProductImport, 'users-collection.xlsx');
     }
 }
